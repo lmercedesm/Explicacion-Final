@@ -13,10 +13,10 @@ namespace Explicacion_Final.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SistemaDeFacturacionEntities : DbContext
+    public partial class SistemaDeFacturacionEntities1 : DbContext
     {
-        public SistemaDeFacturacionEntities()
-            : base("name=SistemaDeFacturacionEntities")
+        public SistemaDeFacturacionEntities1()
+            : base("name=SistemaDeFacturacionEntities1")
         {
         }
     

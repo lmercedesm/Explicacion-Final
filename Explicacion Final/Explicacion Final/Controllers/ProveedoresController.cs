@@ -12,7 +12,7 @@ namespace Explicacion_Final.Controllers
 {
     public class ProveedoresController : Controller
     {
-        private SistemaDeFacturacionEntities db = new SistemaDeFacturacionEntities();
+        private SistemaDeFacturacionEntities1 db = new SistemaDeFacturacionEntities1();
 
         // GET: Proveedores
         public ActionResult Index()
