@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8fc882c267c549ef912318f6c43f5acd" Name="Diagram1">
+      <Diagram DiagramId="32106999b165481eb124751dffb36ad4" Name="Diagram1">
         <EntityTypeShape EntityType="SistemaDeFacturacionModel.Cliente" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SistemaDeFacturacionModel.Producto" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SistemaDeFacturacionModel.Proveedore" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
