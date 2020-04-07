@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Explicacion_Final.Models.Stock>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm())
+    {
+    <p>
+
+        Busqueda por Producto: @Html.TextBox("Producto")<br />
+        Busqueda por Proveedor: @Html.TextBox("Proveeedor")<br />
+
+        <input type="submit" value="Buscar" />
+
+
+
+    </p>
+}
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Proveedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proveedor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdStock }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdStock }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdStock })
+                </td>
+            </tr>
+        }
+
+    </table>

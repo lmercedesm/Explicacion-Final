@@ -5,54 +5,64 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DNI)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoDNI)
-        </th>
-        <th></th>
-    </tr>
+    @using (Html.BeginForm())
+    {
+    <p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DNI)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoDNI)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdProveedores }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdProveedores }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdProveedores })
-        </td>
-    </tr>
+        Busqueda por Nombre: @Html.TextBox("Nombre")<br />
+        Busqueda por Email: @Html.TextBox("Email")<br />
+        <input type="submit" value="Buscar" />
+
+
+
+    </p>
 }
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DNI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DNI)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdProveedores }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdProveedores }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdProveedores })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @using (Html.BeginForm("Print", "Proveedores", FormMethod.Post))
+    {
+        <input type="submit" value="Generar reporte" />
+    }
+

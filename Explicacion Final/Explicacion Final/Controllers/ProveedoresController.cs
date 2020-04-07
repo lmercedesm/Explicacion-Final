@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Explicacion_Final.Models;
+using Rotativa;
 
 namespace Explicacion_Final.Controllers
 {
@@ -15,9 +16,19 @@ namespace Explicacion_Final.Controllers
         private SistemaDeFacturacionEntities1 db = new SistemaDeFacturacionEntities1();
 
         // GET: Proveedores
-        public ActionResult Index()
+        public ActionResult Index(string Nombre, string Email)
         {
-            return View(db.Proveedores.ToList());
+            var Proveedores = from d in db.Proveedores
+                              select d;
+            if (!string.IsNullOrEmpty(Nombre))
+            {
+                Proveedores = Proveedores.Where(n => n.Nombre.Contains(Nombre));
+            }
+            if (!string.IsNullOrEmpty(Email))
+            {
+                Proveedores = Proveedores.Where(n => n.Email.Contains(Email));
+            }
+            return View(Proveedores);
         }
 
         // GET: Proveedores/Details/5
@@ -38,7 +49,27 @@ namespace Explicacion_Final.Controllers
         // GET: Proveedores/Create
         public ActionResult Create()
         {
+            ViewBag.DNI = DNI();
             return View();
+        }
+        public List<SelectListItem> DNI()
+        {
+            return new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Text="Cedula",
+                    Value="Cedula",
+
+                },
+                new SelectListItem()
+                {
+                    Text="RNC",
+                    Value="RNC",
+
+                },
+
+            };
         }
 
         // POST: Proveedores/Create
@@ -46,7 +77,7 @@ namespace Explicacion_Final.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdProveedores,DNI,Nombre,Telefono,Email,TipoDNI")] Proveedore proveedore)
+        public ActionResult Create([Bind(Include = "IdProveedores,TipoDNI,DNI,Nombre,Telefono,Email")] Proveedore proveedore)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +109,7 @@ namespace Explicacion_Final.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdProveedores,DNI,Nombre,Telefono,Email,TipoDNI")] Proveedore proveedore)
+        public ActionResult Edit([Bind(Include = "IdProveedores,DNI,Nombre,Telefono,Email")] Proveedore proveedore)
         {
             if (ModelState.IsValid)
             {
@@ -122,6 +153,12 @@ namespace Explicacion_Final.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Print()
+        {
+
+            return new ActionAsPdf("Index")
+            { FileName = "Reporte.pdf" };
         }
     }
 }

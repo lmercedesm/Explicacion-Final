@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Explicacion_Final.Models.Producto>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm())
+    {
+    <p>
+
+        Busqueda por Nombre: @Html.TextBox("Nombre")<br />
+        <input type="submit" value="Filtro" />
+
+    </p>
+}
+    </p>
+    @using (Html.BeginForm("Print", "Productoes", FormMethod.Post))
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdProductos }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.IdProductos }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdProductos })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <input type="submit" value="Generar reporte" />
+    }
